@@ -1,25 +1,20 @@
 <?php
-    require 'header.php';
-    require 'oeuvres.php';
+    require_once 'header.php';
+    require_once 'bdd.php';
 
     // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
     if(empty($_GET['id'])) {
         header('Location: index.php');
     }
 
-    $oeuvre = null;
-
-    // On parcourt les oeuvres du tableau afin de rechercher celle qui a l'id précisé dans l'URL
-    foreach($oeuvres as $o) {
-        // intval permet de transformer l'id de l'URL en un nombre (exemple : "2" devient 2)
-        if($o['id'] === intval($_GET['id'])) {
-            $oeuvre = $o;
-            break; // On stoppe le foreach si on a trouvé l'oeuvre
-        }
-    }
+    $bdd=getBdd();
+    $sqlQuery = 'SELECT * FROM oeuvres WHERE id = :id';
+    $oeuvreStatement = $bdd->prepare($sqlQuery);
+    $oeuvreStatement->execute(['id' => $_GET['id']]);
+    $oeuvre = $oeuvreStatement->fetch();
 
     // Si aucune oeuvre trouvé, on redirige vers la page d'accueil
-    if(is_null($oeuvre)) {
+    if(!$oeuvre) {
         header('Location: index.php');
     }
 ?>
@@ -37,4 +32,4 @@
     </div>
 </article>
 
-<?php require 'footer.php'; ?>
+<?php require_once 'footer.php'; ?>

@@ -1,7 +1,15 @@
 <?php
-    require 'header.php';
-    require 'oeuvres.php';
+    require_once 'header.php';
+    require_once 'bdd.php';
+
+    $bdd=getBdd();
+     // On récupère tout le contenu de la table oeuvres
+    $sqlQuery = 'SELECT * FROM oeuvres';
+    $oeuvresStatement = $bdd->prepare($sqlQuery);
+    $oeuvresStatement->execute();
+    $oeuvres = $oeuvresStatement->fetchAll();
 ?>
+
 <div id="liste-oeuvres">
     <?php foreach($oeuvres as $oeuvre): ?>
         <article class="oeuvre">
@@ -13,4 +21,4 @@
         </article>
     <?php endforeach; ?>
 </div>
-<?php require 'footer.php'; ?>
+<?php require_once 'footer.php'; ?>
