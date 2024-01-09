@@ -15,7 +15,7 @@
     </div>
     <div class="champ-formulaire">
         <label for="description">Description</label>
-        <textarea name="description" id="description"></textarea>
+        <textarea name="description" id="description" required minlength="3"></textarea>
     </div>
 
     <input type="submit" value="Valider" name="submit">

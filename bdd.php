@@ -2,7 +2,7 @@
 
 function getBdd() {
     try {
-        $mysqlClient = new PDO('mysql:host=localhost;dbname=dbartbox;charset=utf8','root','##Perubo1602##',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $mysqlClient = new PDO('mysql:host=localhost:3306;dbname=artbox;charset=utf8','root','');
     }
     catch (Exception $e)
     {
