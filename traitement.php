@@ -5,7 +5,7 @@ require_once 'bdd.php';
 if(empty($_POST['titre'])
     || empty($_POST['artiste'])
     || empty($_POST['image'])
-//  || strlen($_POST['description']) < 3 remplacé par required minlength="3" dans ajouter.php
+    || strlen($_POST['description']) < 3
     || !filter_var($_POST['image'], FILTER_VALIDATE_URL)) {
     header('Location: ajouter.php?erreur=true');
 } else {
